@@ -1,16 +1,12 @@
-# imr
+A Flutter e-commerce app I built to practice clean architecture patterns with GetX. 
+Includes both customer and admin sides - users can browse products and checkout, 
+while admins get a dashboard to manage inventory and orders. Still using mock data 
+for now but the structure is ready for a real backend. Feel free to use it as a 
+starting point for your own projects.
+```
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Or if you want something even shorter:
+```
+Full-featured e-commerce app in Flutter with GetX state management. 
+Has customer shopping flow and admin panel for managing products/orders. 
+Built with clean architecture so it's easy to extend and maintain.
