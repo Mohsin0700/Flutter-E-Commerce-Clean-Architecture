@@ -16,61 +16,63 @@ class LoginView extends GetView<AuthController> {
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.all(24),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'Welcome Back',
-                style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: 40),
-              TextField(
-                controller: emailController,
-                decoration: InputDecoration(
-                  labelText: 'Email',
-                  border: OutlineInputBorder(),
-                  prefixIcon: Icon(Icons.email),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Welcome Back',
+                  style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
                 ),
-              ),
-              SizedBox(height: 16),
-              TextField(
-                controller: passwordController,
-                obscureText: true,
-                decoration: InputDecoration(
-                  labelText: 'Password',
-                  border: OutlineInputBorder(),
-                  prefixIcon: Icon(Icons.lock),
+                SizedBox(height: 40),
+                TextField(
+                  controller: emailController,
+                  decoration: InputDecoration(
+                    labelText: 'Email',
+                    border: OutlineInputBorder(),
+                    prefixIcon: Icon(Icons.email),
+                  ),
                 ),
-              ),
-              SizedBox(height: 24),
-              Obx(
-                () => controller.isLoading.value
-                    ? CircularProgressIndicator()
-                    : ElevatedButton(
-                        onPressed: () {
-                          controller.login(
-                            emailController.text,
-                            passwordController.text,
-                          );
-                        },
-                        style: ElevatedButton.styleFrom(
-                          minimumSize: Size(double.infinity, 50),
+                SizedBox(height: 16),
+                TextField(
+                  controller: passwordController,
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    labelText: 'Password',
+                    border: OutlineInputBorder(),
+                    prefixIcon: Icon(Icons.lock),
+                  ),
+                ),
+                SizedBox(height: 24),
+                Obx(
+                  () => controller.isLoading.value
+                      ? CircularProgressIndicator()
+                      : ElevatedButton(
+                          onPressed: () {
+                            controller.login(
+                              emailController.text,
+                              passwordController.text,
+                            );
+                          },
+                          style: ElevatedButton.styleFrom(
+                            minimumSize: Size(double.infinity, 50),
+                          ),
+                          child: Text('Login'),
                         ),
-                        child: Text('Login'),
-                      ),
-              ),
-              SizedBox(height: 16),
-              TextButton(
-                onPressed: () => Get.toNamed(AppRoutes.REGISTER),
-                child: Text('Don\'t have an account? Register'),
-              ),
-              SizedBox(height: 20),
-              Text(
-                'Test Accounts:\nadmin@admin.com / admin\nuser@user.com / user',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 12, color: Colors.grey),
-              ),
-            ],
+                ),
+                SizedBox(height: 16),
+                TextButton(
+                  onPressed: () => Get.toNamed(AppRoutes.REGISTER),
+                  child: Text('Don\'t have an account? Register'),
+                ),
+                SizedBox(height: 20),
+                Text(
+                  'Test Accounts:\nadmin@admin.com / admin\nuser@user.com / user',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 12, color: Colors.grey),
+                ),
+              ],
+            ),
           ),
         ),
       ),
