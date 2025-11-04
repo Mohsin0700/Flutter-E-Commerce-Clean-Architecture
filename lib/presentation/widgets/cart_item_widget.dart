@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:imr/core/themes/app_colors.dart';
+import 'package:imr/core/utils/helpers.dart';
 import 'package:imr/presentation/controllers/cart_controller.dart';
 
 class CartItemWidget extends StatelessWidget {
@@ -11,7 +13,7 @@ class CartItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      margin: EdgeInsets.only(bottom: 12),
       child: Padding(
         padding: EdgeInsets.all(12),
         child: Row(
@@ -38,45 +40,60 @@ class CartItemWidget extends StatelessWidget {
                   ),
                   SizedBox(height: 4),
                   Text(
-                    '\${item.product.price.toStringAsFixed(2)}',
+                    Helpers.formatPrice(item.product.price),
                     style: TextStyle(
-                      color: Colors.blue,
+                      color: AppColors.primary,
                       fontWeight: FontWeight.bold,
+                      fontSize: 16,
                     ),
                   ),
                   SizedBox(height: 8),
                   Row(
                     children: [
-                      IconButton(
-                        icon: Icon(Icons.remove_circle_outline),
-                        onPressed: () {
-                          controller.updateQuantity(
-                            item.product.id,
-                            item.quantity - 1,
-                          );
-                        },
-                        padding: EdgeInsets.zero,
-                        constraints: BoxConstraints(),
-                      ),
-                      SizedBox(width: 12),
-                      Text(
-                        '${item.quantity}',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
+                      Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.grey[300]!),
+                          borderRadius: BorderRadius.circular(8),
                         ),
-                      ),
-                      SizedBox(width: 12),
-                      IconButton(
-                        icon: Icon(Icons.add_circle_outline),
-                        onPressed: () {
-                          controller.updateQuantity(
-                            item.product.id,
-                            item.quantity + 1,
-                          );
-                        },
-                        padding: EdgeInsets.zero,
-                        constraints: BoxConstraints(),
+                        child: Row(
+                          children: [
+                            IconButton(
+                              icon: Icon(Icons.remove, size: 18),
+                              onPressed: () => controller.updateQuantity(
+                                item.product.id,
+                                item.quantity - 1,
+                              ),
+                              padding: EdgeInsets.all(4),
+                              constraints: BoxConstraints(
+                                minWidth: 32,
+                                minHeight: 32,
+                              ),
+                            ),
+                            Container(
+                              width: 40,
+                              alignment: Alignment.center,
+                              child: Text(
+                                '${item.quantity}',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            IconButton(
+                              icon: Icon(Icons.add, size: 18),
+                              onPressed: () => controller.updateQuantity(
+                                item.product.id,
+                                item.quantity + 1,
+                              ),
+                              padding: EdgeInsets.all(4),
+                              constraints: BoxConstraints(
+                                minWidth: 32,
+                                minHeight: 32,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
@@ -84,17 +101,16 @@ class CartItemWidget extends StatelessWidget {
               ),
             ),
             Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 IconButton(
                   icon: Icon(Icons.delete, color: Colors.red),
-                  onPressed: () {
-                    controller.removeFromCart(item.product.id);
-                  },
+                  onPressed: () => controller.removeFromCart(item.product.id),
                 ),
                 SizedBox(height: 8),
                 Text(
-                  '\${item.totalPrice.toStringAsFixed(2)}',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  Helpers.formatPrice(item.totalPrice),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                 ),
               ],
             ),
