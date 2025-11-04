@@ -3,20 +3,23 @@ import 'package:imr/data/models/user_model.dart';
 class AuthRepository {
   Future<UserModel?> login(String email, String password) async {
     await Future.delayed(Duration(seconds: 1));
-    // Mock login - replace with actual API
     if (email == 'admin@admin.com' && password == 'admin') {
       return UserModel(
         id: '1',
         email: email,
         name: 'Admin User',
+        phone: '+1234567890',
         isAdmin: true,
+        createdAt: DateTime.now(),
       );
     } else if (email == 'user@user.com' && password == 'user') {
       return UserModel(
         id: '2',
         email: email,
         name: 'Regular User',
+        phone: '+1234567890',
         isAdmin: false,
+        createdAt: DateTime.now(),
       );
     }
     return null;
@@ -33,10 +36,16 @@ class AuthRepository {
       email: email,
       name: name,
       isAdmin: false,
+      createdAt: DateTime.now(),
     );
   }
 
   Future<void> logout() async {
     await Future.delayed(Duration(milliseconds: 500));
+  }
+
+  Future<bool> resetPassword(String email) async {
+    await Future.delayed(Duration(seconds: 1));
+    return true;
   }
 }

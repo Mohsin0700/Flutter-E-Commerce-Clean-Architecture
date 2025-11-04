@@ -1,10 +1,9 @@
 import 'package:get/get.dart';
+import 'package:imr/core/utils/helpers.dart';
 import 'package:imr/data/models/order_model.dart';
 import 'package:imr/data/models/product_model.dart';
 import 'package:imr/data/repositories/order_repository.dart';
 import 'package:imr/data/repositories/product_repository.dart';
-import 'package:imr/presentation/controllers/cart_controller.dart';
-import 'package:imr/presentation/controllers/product_controller.dart';
 
 class AdminController extends GetxController {
   final ProductRepository _productRepository = ProductRepository();
@@ -14,18 +13,27 @@ class AdminController extends GetxController {
   final RxList<OrderModel> orders = <OrderModel>[].obs;
   final RxBool isLoading = false.obs;
 
+  // Analytics data
+  final RxDouble totalRevenue = 0.0.obs;
+  final RxInt totalOrders = 0.obs;
+  final RxInt totalProducts = 0.obs;
+  final RxInt totalUsers = 0.obs;
+
   @override
   void onInit() {
     super.onInit();
-    fetchProducts();
-    fetchOrders();
+    fetchData();
+  }
+
+  Future<void> fetchData() async {
+    await Future.wait([fetchProducts(), fetchOrders(), fetchAnalytics()]);
   }
 
   Future<void> fetchProducts() async {
     isLoading.value = true;
     try {
-      final result = await _productRepository.getProducts();
-      products.value = result;
+      products.value = await _productRepository.getProducts();
+      totalProducts.value = products.length;
     } finally {
       isLoading.value = false;
     }
@@ -33,11 +41,20 @@ class AdminController extends GetxController {
 
   Future<void> fetchOrders() async {
     try {
-      final result = await _orderRepository.getAllOrders();
-      orders.value = result;
+      orders.value = await _orderRepository.getAllOrders();
+      totalOrders.value = orders.length;
     } catch (e) {
-      Get.snackbar('Error', 'Failed to fetch orders');
+      print('Error fetching orders: $e');
     }
+  }
+
+  Future<void> fetchAnalytics() async {
+    // Calculate analytics
+    totalRevenue.value = orders.fold(
+      0,
+      (sum, order) => sum + order.totalAmount,
+    );
+    totalUsers.value = 150; // Mock data
   }
 
   Future<void> addProduct(ProductModel product) async {
@@ -45,9 +62,9 @@ class AdminController extends GetxController {
     try {
       await _productRepository.addProduct(product);
       await fetchProducts();
-      Get.snackbar('Success', 'Product added successfully');
+      Helpers.showSnackbar('Success', 'Product added successfully');
     } catch (e) {
-      Get.snackbar('Error', 'Failed to add product');
+      Helpers.showSnackbar('Error', 'Failed to add product', isError: true);
     } finally {
       isLoading.value = false;
     }
@@ -58,9 +75,9 @@ class AdminController extends GetxController {
     try {
       await _productRepository.updateProduct(product);
       await fetchProducts();
-      Get.snackbar('Success', 'Product updated successfully');
+      Helpers.showSnackbar('Success', 'Product updated successfully');
     } catch (e) {
-      Get.snackbar('Error', 'Failed to update product');
+      Helpers.showSnackbar('Error', 'Failed to update product', isError: true);
     } finally {
       isLoading.value = false;
     }
@@ -71,9 +88,9 @@ class AdminController extends GetxController {
     try {
       await _productRepository.deleteProduct(id);
       await fetchProducts();
-      Get.snackbar('Success', 'Product deleted successfully');
+      Helpers.showSnackbar('Success', 'Product deleted successfully');
     } catch (e) {
-      Get.snackbar('Error', 'Failed to delete product');
+      Helpers.showSnackbar('Error', 'Failed to delete product', isError: true);
     } finally {
       isLoading.value = false;
     }
@@ -83,24 +100,9 @@ class AdminController extends GetxController {
     try {
       await _orderRepository.updateOrderStatus(orderId, status);
       await fetchOrders();
-      Get.snackbar('Success', 'Order status updated');
+      Helpers.showSnackbar('Success', 'Order status updated');
     } catch (e) {
-      Get.snackbar('Error', 'Failed to update order status');
+      Helpers.showSnackbar('Error', 'Failed to update status', isError: true);
     }
-  }
-}
-
-class AdminBinding extends Bindings {
-  @override
-  void dependencies() {
-    Get.lazyPut(() => AdminController());
-  }
-}
-
-class HomeBinding extends Bindings {
-  @override
-  void dependencies() {
-    Get.lazyPut(() => ProductController());
-    Get.lazyPut(() => CartController());
   }
 }

@@ -1,7 +1,7 @@
 import 'package:imr/data/models/order_model.dart';
 
 class OrderRepository {
-  Future<List<OrderModel>> getOrders(String userId) async {
+  Future<List<OrderModel>> getUserOrders(String userId) async {
     await Future.delayed(Duration(seconds: 1));
     return [];
   }
@@ -19,5 +19,10 @@ class OrderRepository {
   Future<bool> updateOrderStatus(String orderId, String status) async {
     await Future.delayed(Duration(milliseconds: 500));
     return true;
+  }
+
+  Future<OrderModel?> getOrderById(String orderId) async {
+    await Future.delayed(Duration(milliseconds: 500));
+    return null;
   }
 }
