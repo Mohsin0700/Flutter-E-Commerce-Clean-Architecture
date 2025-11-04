@@ -3,7 +3,7 @@ import 'package:imr/data/models/user_model.dart';
 class AuthRepository {
   Future<UserModel?> login(String email, String password) async {
     await Future.delayed(Duration(seconds: 1));
-    if (email == 'admin@admin.com' && password == 'admin') {
+    if (email == 'admin@admin.com' && password == 'admin123') {
       return UserModel(
         id: '1',
         email: email,
@@ -12,7 +12,7 @@ class AuthRepository {
         isAdmin: true,
         createdAt: DateTime.now(),
       );
-    } else if (email == 'user@user.com' && password == 'user') {
+    } else if (email == 'user@user.com' && password == 'user123') {
       return UserModel(
         id: '2',
         email: email,

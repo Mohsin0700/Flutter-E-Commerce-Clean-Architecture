@@ -3,7 +3,7 @@ import 'package:imr/core/utils/helpers.dart';
 import 'package:imr/data/models/product_model.dart';
 import 'package:imr/data/repositories/product_repository.dart';
 
-class SearchController extends GetxController {
+class MySearchController extends GetxController {
   final ProductRepository _productRepository = ProductRepository();
 
   final RxList<ProductModel> searchResults = <ProductModel>[].obs;

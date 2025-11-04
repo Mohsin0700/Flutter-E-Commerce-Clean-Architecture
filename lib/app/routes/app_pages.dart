@@ -1,18 +1,28 @@
 import 'package:get/get.dart';
 import 'package:imr/app/bindings/initial_bindings.dart';
 import 'package:imr/app/routes/app_routes.dart';
+import 'package:imr/presentation/views/address/address_view.dart';
 import 'package:imr/presentation/views/admin/admin_dashboard_view.dart';
+import 'package:imr/presentation/views/admin/analytic_view.dart';
 import 'package:imr/presentation/views/admin/manage_order_view.dart';
 import 'package:imr/presentation/views/admin/manage_products_view.dart';
+import 'package:imr/presentation/views/admin/manage_users_view.dart';
 import 'package:imr/presentation/views/auth/forgot_password_view.dart';
 import 'package:imr/presentation/views/cart/cart_view.dart';
+import 'package:imr/presentation/views/cart/checkout_view.dart';
 import 'package:imr/presentation/views/category/category_view.dart';
 import 'package:imr/presentation/views/home/home_view.dart';
 import 'package:imr/presentation/views/auth/login_view.dart';
+import 'package:imr/presentation/views/order/order_details_view.dart';
+import 'package:imr/presentation/views/order/orders_view.dart';
 import 'package:imr/presentation/views/product/product_detail_view.dart';
 import 'package:imr/presentation/views/auth/register_view.dart';
 import 'package:imr/presentation/views/product/product_reviews_view.dart';
+import 'package:imr/presentation/views/profile/edit_profile_view.dart';
+import 'package:imr/presentation/views/profile/profile_view.dart';
+import 'package:imr/presentation/views/search/search_view.dart';
 import 'package:imr/presentation/views/splash_view.dart';
+import 'package:imr/presentation/views/whishlist/whishlist_view.dart';
 
 class AppPages {
   static final pages = [

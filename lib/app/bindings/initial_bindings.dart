@@ -64,7 +64,7 @@ class ProfileBinding extends Bindings {
 class SearchBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(() => SearchController());
+    Get.lazyPut(() => MySearchController());
   }
 }
 

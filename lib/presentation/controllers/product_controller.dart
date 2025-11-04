@@ -4,7 +4,7 @@ import 'package:imr/data/models/product_model.dart';
 import 'package:imr/data/repositories/product_repository.dart';
 
 class ProductController extends GetxController {
-  final ProductRepository _productRepository = ProductRepository();
+  final ProductRepository productRepository = ProductRepository();
 
   final RxList<ProductModel> products = <ProductModel>[].obs;
   final RxList<ProductModel> featuredProducts = <ProductModel>[].obs;
@@ -25,7 +25,7 @@ class ProductController extends GetxController {
   Future<void> fetchProducts({String? category, String? search}) async {
     isLoading.value = true;
     try {
-      final result = await _productRepository.getProducts(
+      final result = await productRepository.getProducts(
         category: category,
         searchQuery: search,
       );
@@ -39,7 +39,7 @@ class ProductController extends GetxController {
 
   Future<void> fetchFeaturedProducts() async {
     try {
-      featuredProducts.value = await _productRepository.getFeaturedProducts();
+      featuredProducts.value = await productRepository.getFeaturedProducts();
     } catch (e) {
       print('Error fetching featured products: $e');
     }
@@ -47,7 +47,7 @@ class ProductController extends GetxController {
 
   Future<void> fetchNewProducts() async {
     try {
-      newProducts.value = await _productRepository.getNewProducts();
+      newProducts.value = await productRepository.getNewProducts();
     } catch (e) {
       print('Error fetching new products: $e');
     }
@@ -56,7 +56,7 @@ class ProductController extends GetxController {
   Future<void> fetchProductById(String id) async {
     isLoading.value = true;
     try {
-      selectedProduct.value = await _productRepository.getProductById(id);
+      selectedProduct.value = await productRepository.getProductById(id);
     } catch (e) {
       Helpers.showSnackbar('Error', 'Failed to fetch product', isError: true);
     } finally {
