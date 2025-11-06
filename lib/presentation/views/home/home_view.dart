@@ -17,6 +17,8 @@ class HomeView extends StatelessWidget {
   final WishlistController wishlistController = Get.find();
   final AuthController authController = Get.find();
 
+  HomeView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
