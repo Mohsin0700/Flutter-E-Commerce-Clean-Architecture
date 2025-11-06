@@ -4,6 +4,7 @@ import 'package:imr/app/routes/app_routes.dart';
 import 'package:imr/core/themes/app_colors.dart';
 import 'package:imr/presentation/controllers/auth_controller.dart';
 import 'package:imr/presentation/controllers/profile_controller.dart';
+import 'package:imr/presentation/controllers/theme_controller.dart';
 import 'package:imr/presentation/widgets/custom_button.dart';
 
 class ProfileView extends GetView<ProfileController> {
@@ -14,6 +15,7 @@ class ProfileView extends GetView<ProfileController> {
   @override
   Widget build(BuildContext context) {
     final user = authController.currentUser.value;
+    final themeController = Get.find<ThemeController>();
 
     return Scaffold(
       appBar: AppBar(title: Text('Profile')),
@@ -29,6 +31,20 @@ class ProfileView extends GetView<ProfileController> {
             ),
             Text(user?.email ?? '', style: TextStyle(color: Colors.grey)),
             SizedBox(height: 32),
+            Obx(
+              () => _buildMenuItem(
+                icon: themeController.isDarkMode.value
+                    ? Icons.dark_mode
+                    : Icons.light_mode,
+                title: 'Dark Mode',
+                onTap: () => themeController.toggleTheme(),
+                customIcon: Switch(
+                  value: themeController.isDarkMode.value,
+                  onChanged: (value) => themeController.toggleTheme(),
+                ),
+              ),
+            ),
+
             _buildMenuItem(
               icon: Icons.edit,
               title: 'Edit Profile',
@@ -76,13 +92,14 @@ class ProfileView extends GetView<ProfileController> {
     required IconData icon,
     required String title,
     required VoidCallback onTap,
+    Switch? customIcon,
   }) {
     return Card(
       margin: EdgeInsets.only(bottom: 8),
       child: ListTile(
         leading: Icon(icon, color: AppColors.primary),
         title: Text(title),
-        trailing: Icon(Icons.chevron_right),
+        trailing: customIcon ?? Icon(Icons.chevron_right),
         onTap: onTap,
       ),
     );

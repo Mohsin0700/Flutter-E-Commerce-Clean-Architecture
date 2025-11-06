@@ -5,6 +5,8 @@ import 'package:imr/core/utils/helpers.dart';
 import 'package:imr/presentation/controllers/order_controller.dart';
 
 class OrdersView extends GetView<OrderController> {
+  const OrdersView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -4,6 +4,7 @@ import 'package:imr/app/routes/app_routes.dart';
 import 'package:imr/core/themes/app_colors.dart';
 import 'package:imr/core/utils/helpers.dart';
 import 'package:imr/presentation/controllers/cart_controller.dart';
+import 'package:imr/presentation/controllers/order_controller.dart';
 import 'package:imr/presentation/widgets/cart_item_widget.dart';
 
 class CartView extends GetView<CartController> {
@@ -164,7 +165,10 @@ class CartView extends GetView<CartController> {
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () => Get.toNamed(AppRoutes.CHECKOUT),
+                      onPressed: () async {
+                        Get.put(OrderController());
+                        Get.toNamed(AppRoutes.CHECKOUT);
+                      },
                       style: ElevatedButton.styleFrom(
                         padding: EdgeInsets.symmetric(vertical: 16),
                       ),

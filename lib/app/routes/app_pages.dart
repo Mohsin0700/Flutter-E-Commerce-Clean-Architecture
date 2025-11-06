@@ -13,6 +13,7 @@ import 'package:imr/presentation/views/cart/checkout_view.dart';
 import 'package:imr/presentation/views/category/category_view.dart';
 import 'package:imr/presentation/views/home/home_view.dart';
 import 'package:imr/presentation/views/auth/login_view.dart';
+import 'package:imr/presentation/views/main/main_view.dart';
 import 'package:imr/presentation/views/order/order_details_view.dart';
 import 'package:imr/presentation/views/order/orders_view.dart';
 import 'package:imr/presentation/views/product/product_detail_view.dart';
@@ -27,6 +28,7 @@ import 'package:imr/presentation/views/whishlist/whishlist_view.dart';
 class AppPages {
   static final pages = [
     GetPage(name: AppRoutes.SPLASH, page: () => SplashView()),
+    GetPage(name: AppRoutes.MAIN, page: () => MainView()),
     GetPage(
       name: AppRoutes.LOGIN,
       page: () => LoginView(),

@@ -40,7 +40,7 @@ class AuthController extends GetxController {
         if (user.isAdmin) {
           Get.offAllNamed(AppRoutes.ADMIN_DASHBOARD);
         } else {
-          Get.offAllNamed(AppRoutes.HOME);
+          Get.offAllNamed(AppRoutes.MAIN);
         }
         Helpers.showSnackbar('Success', 'Welcome back, ${user.name}!');
       } else {
