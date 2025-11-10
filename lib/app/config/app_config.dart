@@ -6,8 +6,3 @@ class AppConfig {
   static const double shippingCost = 5.99;
   static const double freeShippingThreshold = 50.00;
 }
-
-class AppUrls {
-  static const String baseUrl = 'https://fakestoreapi.com/';
-  static const String products = 'products';
-}

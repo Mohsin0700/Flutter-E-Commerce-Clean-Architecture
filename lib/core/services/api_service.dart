@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:imr/app/config/app_config.dart';
+import 'package:imr/core/constants/app_urls.dart';
 
 class ApiService {
   final Dio _dio = Dio();
