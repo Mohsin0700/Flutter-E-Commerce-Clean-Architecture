@@ -37,6 +37,8 @@ dependencies:
   get: ^4.7.2
   shared_preferences: ^2.5.3
   dio: ^5.9.0
+  supabase_flutter: ^2.10.3
+  flutter_dotenv: ^6.0.0
 
 dev_dependencies:
   flutter_test:

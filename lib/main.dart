@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:imr/app/bindings/initial_bindings.dart';
 import 'package:imr/app/routes/app_pages.dart';
 import 'package:imr/app/routes/app_routes.dart';
 import 'package:imr/core/services/storage_service.dart';
 import 'package:imr/core/themes/app_theme.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // await dotenv.load(fileName: ".env"); // loads .env from project root
+  // final projectUrl = dotenv.env['ProjectURL'] ?? 'No URL Found';
+  // final annonKey = dotenv.env['AnonKey'] ?? 'No Key Found';
+
+  // await Supabase.initialize(url: projectUrl, anonKey: annonKey);
   await initServices();
   runApp(MyApp());
 }
