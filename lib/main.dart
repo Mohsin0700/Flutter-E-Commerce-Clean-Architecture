@@ -10,11 +10,11 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // await dotenv.load(fileName: ".env"); // loads .env from project root
-  // final projectUrl = dotenv.env['ProjectURL'] ?? 'No URL Found';
-  // final annonKey = dotenv.env['AnonKey'] ?? 'No Key Found';
+  await dotenv.load(fileName: ".env"); // loads .env from project root
+  final projectUrl = dotenv.env['ProjectURL'] ?? 'No URL Found';
+  final annonKey = dotenv.env['AnonKey'] ?? 'No Key Found';
 
-  // await Supabase.initialize(url: projectUrl, anonKey: annonKey);
+  await Supabase.initialize(url: projectUrl, anonKey: annonKey);
   await initServices();
   runApp(MyApp());
 }

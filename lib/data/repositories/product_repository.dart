@@ -1,12 +1,17 @@
 import 'package:imr/data/models/product_model.dart';
 
+import '../../core/services/supabase_services.dart';
+
 class ProductRepository {
+  final SupabaseServices _supabaseServices = SupabaseServices();
   Future<List<ProductModel>> getProducts({
     String? category,
     String? searchQuery,
   }) async {
     await Future.delayed(Duration(seconds: 1));
-
+    print('Get Products function called from its repo');
+    final result = await _supabaseServices.fetchData();
+    print('Fetched Data from Repo::::::::::::::::::::::::::::::::::$result');
     List<ProductModel> products = [
       ProductModel(
         id: '1',
