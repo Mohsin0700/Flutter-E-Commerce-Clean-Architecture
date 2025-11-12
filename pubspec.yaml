@@ -39,6 +39,7 @@ dependencies:
   dio: ^5.9.0
   supabase_flutter: ^2.10.3
   flutter_dotenv: ^6.0.0
+  cached_network_image: ^3.4.1
 
 dev_dependencies:
   flutter_test:

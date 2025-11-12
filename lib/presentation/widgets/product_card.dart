@@ -16,8 +16,8 @@ class ProductCard extends StatelessWidget {
     required this.product,
     required this.onTap,
     required this.onAddToCart,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -66,9 +66,7 @@ class ProductCard extends StatelessWidget {
                   ),
                   child: Stack(
                     children: [
-                      const Center(
-                        child: Icon(Icons.image, size: 64, color: Colors.grey),
-                      ),
+                      Center(child: Image.network(product.imageUrl)),
                       if (product.hasDiscount)
                         Positioned(
                           top: 8,

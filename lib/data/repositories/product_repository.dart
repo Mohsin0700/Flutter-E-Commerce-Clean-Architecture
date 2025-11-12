@@ -11,6 +11,10 @@ class ProductRepository {
     await Future.delayed(Duration(seconds: 1));
     print('Get Products function called from its repo');
     final result = await _supabaseServices.fetchData();
+    if (result == null) return [];
+    if (result is List) {
+      return result.map((e) => ProductModel.fromJson(e)).toList();
+    }
     print('Fetched Data from Repo::::::::::::::::::::::::::::::::::$result');
     List<ProductModel> products = [
       ProductModel(
