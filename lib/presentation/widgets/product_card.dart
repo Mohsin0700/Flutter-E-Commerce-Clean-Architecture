@@ -1,5 +1,6 @@
 // lib/presentation/widgets/product_card.dart
 import 'dart:math' as math;
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:imr/core/themes/app_colors.dart';
@@ -66,7 +67,16 @@ class ProductCard extends StatelessWidget {
                   ),
                   child: Stack(
                     children: [
-                      Center(child: Image.network(product.imageUrl)),
+                      Center(
+                        child: CachedNetworkImage(
+                          fit: BoxFit.contain,
+                          imageUrl: product.imageUrl,
+                          placeholder: (context, url) =>
+                              CircularProgressIndicator(),
+                          errorWidget: (context, url, error) =>
+                              Icon(Icons.error),
+                        ),
+                      ),
                       if (product.hasDiscount)
                         Positioned(
                           top: 8,

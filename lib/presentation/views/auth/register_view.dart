@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:imr/core/utils/validators.dart';
 import 'package:imr/presentation/controllers/auth_controller.dart';
+import 'package:imr/presentation/views/auth/confirm_email.dart';
 
 class RegisterView extends GetView<AuthController> {
   final nameController = TextEditingController();
@@ -10,10 +11,18 @@ class RegisterView extends GetView<AuthController> {
   final confirmPasswordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
+  RegisterView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Create Account')),
+      appBar: AppBar(
+        title: Text('Create Account'),
+        leading: IconButton(
+          onPressed: () => Get.to(() => ConfirmEmail()),
+          icon: Icon(Icons.email),
+        ),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: EdgeInsets.all(24),
@@ -89,12 +98,12 @@ class RegisterView extends GetView<AuthController> {
                               );
                             }
                           },
+                          style: ElevatedButton.styleFrom(
+                            minimumSize: Size(double.infinity, 56),
+                          ),
                           child: Text(
                             'Sign Up',
                             style: TextStyle(fontSize: 16),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            minimumSize: Size(double.infinity, 56),
                           ),
                         ),
                 ),
